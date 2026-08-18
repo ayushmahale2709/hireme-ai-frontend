@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const SUGGESTIONS = [
   "What are the candidate's strongest skills?",
@@ -94,6 +95,7 @@ body {
 }
 
 /* FULL WIDTH FLEXIBLE SHELL */
+
 .hm-shell {
   width: 100%;
   max-width: none;
@@ -107,6 +109,7 @@ body {
 }
 
 /* HEADER */
+
 .hm-header {
   width: 100%;
   flex: none;
@@ -204,6 +207,7 @@ body {
 }
 
 /* ORB */
+
 .hm-orb {
   position: relative;
   width: 34px;
@@ -261,6 +265,7 @@ body {
 }
 
 /* CHAT */
+
 .hm-chat {
   flex: 1;
   min-height: 0;
@@ -273,6 +278,7 @@ body {
 }
 
 /* WELCOME */
+
 .hm-welcome {
   width: 100%;
   min-height: 100%;
@@ -346,6 +352,7 @@ body {
 }
 
 /* MESSAGES */
+
 .hm-msg {
   display: flex;
   align-items: flex-start;
@@ -457,6 +464,7 @@ body {
 }
 
 /* MARKDOWN */
+
 .hm-ai-body h1,
 .hm-ai-body h2,
 .hm-ai-body h3 {
@@ -490,6 +498,11 @@ body {
 
 .hm-ai-body a {
   color: var(--accent);
+  text-decoration: none;
+}
+
+.hm-ai-body a:hover {
+  text-decoration: underline;
 }
 
 .hm-ai-body code {
@@ -502,6 +515,8 @@ body {
     ui-monospace,
     SFMono-Regular,
     Menlo,
+    Monaco,
+    Consolas,
     monospace;
 }
 
@@ -513,6 +528,7 @@ body {
   overflow-x: auto;
   max-width: 100%;
   text-align: left;
+  margin: 12px 0;
 }
 
 .hm-ai-body pre code {
@@ -529,7 +545,63 @@ body {
   text-align: left;
 }
 
+/* MARKDOWN TABLES */
+
+.hm-ai-body table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 14px;
+  text-align: left;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hm-ai-body thead,
+.hm-ai-body tbody {
+  width: 100%;
+}
+
+.hm-ai-body th,
+.hm-ai-body td {
+  border: 1px solid var(--border);
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+  min-width: 120px;
+}
+
+.hm-ai-body th {
+  background: var(--surface-2);
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.hm-ai-body td {
+  color: var(--text);
+}
+
+.hm-ai-body tr:nth-child(even) td {
+  background: color-mix(
+    in oklab,
+    var(--surface-2) 35%,
+    transparent
+  );
+}
+
+/* HORIZONTAL RULE */
+
+.hm-ai-body hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 16px 0;
+}
+
 /* COMPOSER */
+
 .hm-composer-wrap {
   width: 100%;
   flex: none;
@@ -627,6 +699,7 @@ body {
 }
 
 /* LARGE DESKTOP */
+
 @media (min-width: 1400px) {
   .hm-shell {
     padding-left: clamp(32px, 5vw, 80px);
@@ -651,6 +724,7 @@ body {
 }
 
 /* TABLET / SMALL LAPTOP */
+
 @media (max-width: 900px) {
   .hm-shell {
     padding: 0 20px;
@@ -663,9 +737,14 @@ body {
   .hm-bubble {
     max-width: 85%;
   }
+
+  .hm-ai-body table {
+    font-size: 13px;
+  }
 }
 
 /* MOBILE */
+
 @media (max-width: 720px) {
   .hm-shell {
     padding: 0 12px;
@@ -714,9 +793,20 @@ body {
   .hm-composer {
     border-radius: 16px;
   }
+
+  .hm-ai-body table {
+    font-size: 12.5px;
+  }
+
+  .hm-ai-body th,
+  .hm-ai-body td {
+    padding: 8px 9px;
+    min-width: 110px;
+  }
 }
 
 /* SMALL MOBILE */
+
 @media (max-width: 500px) {
   .hm-toggle span {
     display: none;
@@ -754,6 +844,7 @@ body {
 }
 
 /* VERY SMALL MOBILE */
+
 @media (max-width: 400px) {
   .hm-shell {
     padding: 0 9px;
@@ -775,9 +866,14 @@ body {
   .hm-chip {
     width: 100%;
   }
+
+  .hm-ai-body table {
+    font-size: 12px;
+  }
 }
 
 /* REDUCE MOTION */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
@@ -1150,7 +1246,9 @@ export default function App() {
                     {m.content ? (
 
                       <>
-                        <ReactMarkdown>
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                        >
                           {m.content}
                         </ReactMarkdown>
 
