@@ -3,11 +3,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const SUGGESTIONS = [
-  "What are the candidate's strongest skills?",
-  "Tell me about the candidate's experience.",
-  "What projects has the candidate worked on?",
-  "What is the candidate's Java experience?",
-  "What AI experience does the candidate have?",
+  "What are your strongest skills?",
+  "Tell me about your experience.",
+  "What projects have you worked on?",
+  "What is your Java experience?",
+  "What AI experience do you have?",
 ];
 
 const CSS = `
@@ -130,15 +130,16 @@ body {
 
 .hm-title {
   font-size: 16px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   white-space: nowrap;
 }
 
 .hm-sub {
   font-size: 12px;
   color: var(--text-dim);
-  margin-top: 2px;
+  margin-top: 3px;
+  letter-spacing: 0.01em;
 }
 
 .hm-status {
@@ -148,6 +149,7 @@ body {
   font-size: 11px;
   color: var(--text-dim);
   margin-left: 10px;
+  letter-spacing: 0;
 }
 
 .hm-dot {
@@ -214,15 +216,22 @@ body {
   height: 34px;
   border-radius: 50%;
   flex: none;
-  background: radial-gradient(
-    circle at 32% 30%,
-    #ffffff 0%,
-    var(--accent) 42%,
-    var(--accent-2) 100%
-  );
+
+  background:
+    radial-gradient(
+      circle at 32% 30%,
+      #ffffff 0%,
+      var(--accent) 38%,
+      var(--accent-2) 72%,
+      #15121f 100%
+    );
+
   box-shadow:
     0 0 18px
-    color-mix(in oklab, var(--accent) 45%, transparent);
+    color-mix(in oklab, var(--accent) 45%, transparent),
+    0 0 42px
+    color-mix(in oklab, var(--accent-2) 18%, transparent);
+
   animation: hm-pulse 3.4s ease-in-out infinite;
 }
 
@@ -292,9 +301,10 @@ body {
 }
 
 .hm-welcome h1 {
-  font-size: clamp(24px, 3vw, 32px);
-  margin: 6px 0 0;
-  letter-spacing: -0.02em;
+  font-size: clamp(25px, 3vw, 34px);
+  margin: 8px 0 0;
+  letter-spacing: -0.025em;
+  font-weight: 700;
 }
 
 .hm-welcome p {
@@ -302,7 +312,7 @@ body {
   color: var(--text-dim);
   font-size: clamp(13px, 1.5vw, 15px);
   max-width: 620px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .hm-sugg-label {
@@ -1101,7 +1111,7 @@ export default function App() {
 
             <div>
               <div className="hm-title">
-                HireMe AI
+                A.R.I.A.
 
                 <span className="hm-status">
                   <span className="hm-dot" />
@@ -1110,7 +1120,7 @@ export default function App() {
               </div>
 
               <div className="hm-sub">
-                Resume Intelligence
+                Ayush's AI Persona
               </div>
             </div>
 
@@ -1175,14 +1185,14 @@ export default function App() {
               />
 
               <h1>
-                Hi, I'm HireMe AI.
+                Hi, I'm A.R.I.A.
               </h1>
 
               <p>
-                Ask me anything about the
-                candidate's resume. I'll answer
-                using only the information
-                available in the resume.
+                I'm Ayush's AI persona. Ask me
+                anything about my skills, projects,
+                experience, education, or technical
+                background.
               </p>
 
               <div className="hm-sugg-label">
@@ -1261,7 +1271,7 @@ export default function App() {
                     ) : (
 
                       <span className="hm-thinking">
-                        AI is thinking
+                        A.R.I.A. is thinking
                         <i />
                         <i />
                         <i />
@@ -1294,8 +1304,8 @@ export default function App() {
               ref={taRef}
               rows={1}
               value={input}
-              placeholder="Ask about skills, experience, projects..."
-              aria-label="Message HireMe AI"
+              placeholder="Ask A.R.I.A. anything..."
+              aria-label="Message A.R.I.A."
               disabled={loading}
               onChange={(e) => {
                 setInput(e.target.value);
