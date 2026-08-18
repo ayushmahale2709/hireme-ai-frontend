@@ -1111,7 +1111,7 @@ export default function App() {
 
             <div>
               <div className="hm-title">
-                A.R.I.A.
+                A.R.I.A
 
                 <span className="hm-status">
                   <span className="hm-dot" />
@@ -1185,7 +1185,7 @@ export default function App() {
               />
 
               <h1>
-                Hi, I'm A.R.I.A.
+                Hi, I'm A.R.I.A
               </h1>
 
               <p>
@@ -1271,7 +1271,7 @@ export default function App() {
                     ) : (
 
                       <span className="hm-thinking">
-                        A.R.I.A. is thinking
+                        A.R.I.A is thinking
                         <i />
                         <i />
                         <i />
@@ -1304,8 +1304,8 @@ export default function App() {
               ref={taRef}
               rows={1}
               value={input}
-              placeholder="Ask A.R.I.A. anything..."
-              aria-label="Message A.R.I.A."
+              placeholder="Ask A.R.I.A anything..."
+              aria-label="Message A.R.I.A"
               disabled={loading}
               onChange={(e) => {
                 setInput(e.target.value);
