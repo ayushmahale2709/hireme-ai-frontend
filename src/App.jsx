@@ -49,15 +49,20 @@ const CSS = `
 html,
 body,
 #root {
+  width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
+  overflow: hidden;
 }
 
 .hm-root {
+  width: 100%;
   height: 100dvh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background:
@@ -88,22 +93,27 @@ body {
   text-align: left;
 }
 
+/* FULL WIDTH FLEXIBLE SHELL */
 .hm-shell {
   width: 100%;
-  max-width: 860px;
-  margin: 0 auto;
+  max-width: none;
+  height: 100%;
+  margin: 0;
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
+  padding: 0 clamp(16px, 3vw, 48px);
 }
 
+/* HEADER */
 .hm-header {
+  width: 100%;
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
   padding: 16px 0 12px;
   border-bottom: 1px solid var(--border);
 }
@@ -119,11 +129,13 @@ body {
   font-size: 16px;
   font-weight: 650;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .hm-sub {
   font-size: 12px;
   color: var(--text-dim);
+  margin-top: 2px;
 }
 
 .hm-status {
@@ -158,6 +170,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: none;
 }
 
 .hm-toggle {
@@ -174,6 +187,7 @@ body {
   transition:
     background 0.2s,
     transform 0.15s;
+  white-space: nowrap;
 }
 
 .hm-toggle:hover {
@@ -189,6 +203,7 @@ body {
   cursor: not-allowed;
 }
 
+/* ORB */
 .hm-orb {
   position: relative;
   width: 34px;
@@ -201,7 +216,8 @@ body {
     var(--accent) 42%,
     var(--accent-2) 100%
   );
-  box-shadow: 0 0 18px
+  box-shadow:
+    0 0 18px
     color-mix(in oklab, var(--accent) 45%, transparent);
   animation: hm-pulse 3.4s ease-in-out infinite;
 }
@@ -244,26 +260,33 @@ body {
   }
 }
 
+/* CHAT */
 .hm-chat {
   flex: 1;
   min-height: 0;
+  width: 100%;
   overflow-y: auto;
-  padding: 20px 2px 8px;
+  overflow-x: hidden;
+  padding: clamp(20px, 4vh, 48px) 0 8px;
   scroll-behavior: smooth;
   text-align: left;
 }
 
+/* WELCOME */
 .hm-welcome {
+  width: 100%;
+  min-height: 100%;
   text-align: center;
-  padding: 8vh 8px 0;
+  padding: clamp(5vh, 10vh, 12vh) 8px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 14px;
 }
 
 .hm-welcome h1 {
-  font-size: 26px;
+  font-size: clamp(24px, 3vw, 32px);
   margin: 6px 0 0;
   letter-spacing: -0.02em;
 }
@@ -271,8 +294,8 @@ body {
 .hm-welcome p {
   margin: 0;
   color: var(--text-dim);
-  font-size: 14px;
-  max-width: 420px;
+  font-size: clamp(13px, 1.5vw, 15px);
+  max-width: 620px;
   line-height: 1.6;
 }
 
@@ -285,10 +308,12 @@ body {
 }
 
 .hm-chips {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
+  align-items: center;
 }
 
 .hm-chip {
@@ -320,6 +345,7 @@ body {
   cursor: not-allowed;
 }
 
+/* MESSAGES */
 .hm-msg {
   display: flex;
   align-items: flex-start;
@@ -351,7 +377,7 @@ body {
   color: var(--user-text);
   padding: 11px 15px;
   border-radius: 18px 18px 4px 18px;
-  max-width: 78%;
+  max-width: min(78%, 900px);
   font-size: 15px;
   line-height: 1.55;
   white-space: pre-wrap;
@@ -364,6 +390,7 @@ body {
   min-width: 0;
   flex: 1 1 auto;
   width: 100%;
+  max-width: 100%;
   font-size: 15px;
   line-height: 1.7;
   overflow-wrap: anywhere;
@@ -429,6 +456,7 @@ body {
   }
 }
 
+/* MARKDOWN */
 .hm-ai-body h1,
 .hm-ai-body h2,
 .hm-ai-body h3 {
@@ -470,7 +498,11 @@ body {
   border-radius: 5px;
   padding: 1px 5px;
   font-size: 13px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
 }
 
 .hm-ai-body pre {
@@ -497,11 +529,15 @@ body {
   text-align: left;
 }
 
+/* COMPOSER */
 .hm-composer-wrap {
+  width: 100%;
+  flex: none;
   padding: 10px 0 18px;
 }
 
 .hm-composer {
+  width: 100%;
   display: flex;
   align-items: flex-end;
   gap: 8px;
@@ -521,7 +557,9 @@ body {
     var(--accent) 60%,
     var(--border)
   );
-  box-shadow: 0 0 0 3px
+
+  box-shadow:
+    0 0 0 3px
     color-mix(in oklab, var(--accent) 18%, transparent);
 }
 
@@ -538,6 +576,7 @@ body {
   max-height: 140px;
   padding: 6px 0;
   min-width: 0;
+  width: 100%;
   text-align: left;
 }
 
@@ -587,13 +626,62 @@ body {
   outline-offset: 2px;
 }
 
+/* LARGE DESKTOP */
+@media (min-width: 1400px) {
+  .hm-shell {
+    padding-left: clamp(32px, 5vw, 80px);
+    padding-right: clamp(32px, 5vw, 80px);
+  }
+
+  .hm-welcome {
+    padding-top: 10vh;
+  }
+
+  .hm-welcome h1 {
+    font-size: 34px;
+  }
+
+  .hm-welcome p {
+    font-size: 15px;
+  }
+
+  .hm-ai-body {
+    font-size: 16px;
+  }
+}
+
+/* TABLET / SMALL LAPTOP */
+@media (max-width: 900px) {
+  .hm-shell {
+    padding: 0 20px;
+  }
+
+  .hm-welcome {
+    padding-top: 6vh;
+  }
+
+  .hm-bubble {
+    max-width: 85%;
+  }
+}
+
+/* MOBILE */
 @media (max-width: 720px) {
   .hm-shell {
     padding: 0 12px;
   }
 
+  .hm-header {
+    padding: 12px 0 10px;
+    gap: 10px;
+  }
+
   .hm-title {
     font-size: 15px;
+  }
+
+  .hm-sub {
+    font-size: 11px;
   }
 
   .hm-welcome {
@@ -602,6 +690,11 @@ body {
 
   .hm-welcome h1 {
     font-size: 21px;
+  }
+
+  .hm-welcome p {
+    max-width: 90%;
+    font-size: 13px;
   }
 
   .hm-bubble {
@@ -617,8 +710,13 @@ body {
   .hm-hint {
     display: none;
   }
+
+  .hm-composer {
+    border-radius: 16px;
+  }
 }
 
+/* SMALL MOBILE */
 @media (max-width: 500px) {
   .hm-toggle span {
     display: none;
@@ -627,8 +725,35 @@ body {
   .hm-toggle {
     padding: 8px 10px;
   }
+
+  .hm-header-actions {
+    gap: 6px;
+  }
+
+  .hm-brand {
+    gap: 9px;
+  }
+
+  .hm-orb {
+    width: 30px;
+    height: 30px;
+  }
+
+  .hm-welcome {
+    padding-top: 4vh;
+  }
+
+  .hm-welcome p {
+    max-width: 100%;
+  }
+
+  .hm-chip {
+    width: auto;
+    max-width: 100%;
+  }
 }
 
+/* VERY SMALL MOBILE */
 @media (max-width: 400px) {
   .hm-shell {
     padding: 0 9px;
@@ -642,8 +767,17 @@ body {
     width: 58px;
     height: 58px;
   }
+
+  .hm-welcome h1 {
+    font-size: 20px;
+  }
+
+  .hm-chip {
+    width: 100%;
+  }
 }
 
+/* REDUCE MOTION */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
@@ -697,7 +831,10 @@ export default function App() {
     if (!el) return;
 
     stickRef.current =
-      el.scrollHeight - el.scrollTop - el.clientHeight < 90;
+      el.scrollHeight -
+        el.scrollTop -
+        el.clientHeight <
+      90;
   };
 
   const autoGrow = () => {
@@ -883,11 +1020,7 @@ export default function App() {
 
           </div>
 
-          {/* HEADER ACTIONS */}
-
           <div className="hm-header-actions">
-
-            {/* NEW CHAT */}
 
             <button
               className="hm-toggle"
@@ -898,8 +1031,6 @@ export default function App() {
               ↻
               <span>New Chat</span>
             </button>
-
-            {/* THEME */}
 
             <button
               className="hm-toggle"
@@ -984,7 +1115,6 @@ export default function App() {
           ) : (
 
             messages.map((m, i) =>
-
               m.role === "user" ? (
 
                 <div
